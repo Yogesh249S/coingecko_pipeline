@@ -1,0 +1,56 @@
+
+
+// connect to coingecko_db:
+
+ psql -U postgres -d coingecko_db
+
+
+1. Top 5 Cryptos by Market Cap
+
+SELECT coin_id, market_cap_usd
+FROM coin_market_data
+ORDER BY market_cap_usd DESC
+LIMIT 5;
+
+2. Biggest Gainers in Last 24 Hours
+
+SELECT coin_id, price_change_24h_pct
+FROM coin_market_data
+ORDER BY price_change_24h_pct DESC
+LIMIT 5;
+
+3. Biggest Losers in Last 24 Hours
+
+SELECT coin_id, price_change_24h_pct
+FROM coin_market_data
+ORDER BY price_change_24h_pct ASC
+LIMIT 5;
+
+4. Cryptos With Price > $1000
+
+SELECT coin_id, price_usd
+FROM coin_market_data
+WHERE price_usd > 1000
+ORDER BY price_usd DESC;
+
+5. Total Market Cap Across All Coins
+
+SELECT SUM(market_cap_usd) AS total_market_cap
+FROM coin_market_data;
+
+6. Coins Where Circulating ≠ Total Supply
+
+SELECT coin_id, circulating_supply, total_supply
+FROM coin_market_data
+WHERE circulating_supply <> total_supply;
+
+7. Most Recent Extraction Timestamp
+
+SELECT MAX(extracted_at) AS latest_pull
+FROM coin_market_data;
+
+8. Check for Null Values (Quality Check)
+
+SELECT *
+FROM coin_market_data
+WHERE coin_id IS NULL OR price_usd IS NULL;

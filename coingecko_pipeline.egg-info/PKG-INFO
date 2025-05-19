@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: coingecko_pipeline
+Version: 0.1
+Requires-Dist: requests
+Requires-Dist: pandas
+Requires-Dist: psycopg2-binary
+Requires-Dist: python-dotenv
+Dynamic: requires-dist
